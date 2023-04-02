@@ -10,4 +10,9 @@ export class UsersService {
         const users = await this.userRepository.findAll();
         return users;
     }
+
+    async createUser({email, password}) {
+        const user = await this.userRepository.create({email, password});
+        return user;
+    }
 }
