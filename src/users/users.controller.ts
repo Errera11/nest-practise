@@ -13,7 +13,7 @@ export class UsersController {
         return users;
     }
 
-    @Post('/create')
+    @Post('/createUser')
     async createUser(@Body() userDTO: CreateUserDto) {
         const user = await this.userService.createUser(userDTO);
         return user;
