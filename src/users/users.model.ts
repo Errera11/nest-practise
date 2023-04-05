@@ -19,7 +19,7 @@ export class User extends Model<User, UserCreation>  {
     @Column({type: DataType.STRING, allowNull: false, unique: false})
     password: string;
 
-    @Column({type: DataType.STRING, allowNull: true, unique: false, defaultValue: false})
+    @Column({type: DataType.BOOLEAN, allowNull: true, unique: false, defaultValue: false})
     banned: boolean;
 
     @Column({type: DataType.STRING, allowNull: true, unique: false})
