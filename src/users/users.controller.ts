@@ -34,8 +34,7 @@ export class UsersController {
     }
 
 
-    @Roles('ADMIN')
-    @UseGuards(RolesGuard)
+
     @Post('/addRole')
     async addRole(@Body() dto: AddRoleDto) {
         return await this.userService.addRole(dto);

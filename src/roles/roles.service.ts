@@ -11,6 +11,7 @@ export class RolesService {
         return await this.roleRepository.findAll();
     }
 
+
     async createRole(dto) {
         return await this.roleRepository.create(dto)
     }

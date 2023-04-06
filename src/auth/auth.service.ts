@@ -34,6 +34,7 @@ export class AuthService {
 
     private async verifyUser(dto: UserDto) {
         const user = await this.userService.findByEmail(dto.email);
+        if(!user) throw new HttpException('User on found', HttpStatus.NOT_FOUND)
         const isValidPass = await bcrypt.compare(dto.password, user.password);
         if(user && isValidPass) return user;
         throw new UnauthorizedException({message: 'Invalid email or password'})
