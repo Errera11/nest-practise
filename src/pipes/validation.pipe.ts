@@ -7,16 +7,26 @@ import {ValidationException} from "../exceptions/validation-exception";
 export class ValidationPipe implements PipeTransform {
 
     async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
-        const object = plainToClass(metadata.metatype, value);
-        const errors = await validate(object);
-        const messages = errors.map(error => {
-            const key = error.property;
-            const value = Object.values(error.constraints)
-            return {[key]: value};
-        });
+        try {
+            const obj = plainToClass(metadata.metatype, value);
 
-        if(errors.length) throw new ValidationException(messages);
-        return value;
+            const errors = await validate(obj);
+
+
+            if (errors.length) {
+                const messages = errors.map(error => {
+                    const key = error.property;
+                    const value = Object.values(error.constraints)
+                    return {[key]: value};
+                });
+                throw new ValidationException(messages);
+            }
+            return value;
+        } catch (e) {
+            console.log(e);
+        }
+
+
     }
 
 }
